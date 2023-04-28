@@ -33,10 +33,13 @@
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-hook-form": "^7.43.9",
+        "react-icons": "^4.8.0",
+        "styled-components": "^5.3.10",
         "typescript": "5.0.4",
         "yup": "^1.0.2"
     },
     "devDependencies": {
+        "@types/styled-components": "^5.1.26",
         "@types/uuid": "^9.0.1"
     }
 }

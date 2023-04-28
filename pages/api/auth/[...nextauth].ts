@@ -17,6 +17,7 @@ const providers: Provider[] = [
   GoogleProvider({
     clientId: process.env.GOOGLE_CLIENT_ID || '',
     clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+
   }),
 ]
 export const authOptions: NextAuthOptions = {
@@ -25,6 +26,18 @@ export const authOptions: NextAuthOptions = {
   },
   providers,
   callbacks: {
+  async signIn({user,email,account,profile}){
+    // @ts-ignore
+    console.log("Login with:"+account.provider)
+    if(account && account.provider === 'google'){
+      console.log("Login with Google")
+      console.log("user")
+      console.log(user)
+      console.log("profile")
+      console.log(profile)
+    }
+    return true;
+    },
     async jwt({ token, user }: any) {
       return { ...token, ...user }
     },
@@ -33,9 +46,9 @@ export const authOptions: NextAuthOptions = {
       return session
     },
   },
-  jwt: {
-    secret: '1993',
-  },
+  // jwt: {
+  //   secret: process.env.NEXTAUTH_SECRET,
+  // },
   pages: {
     signIn: '/auth/login',
   },
