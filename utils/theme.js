@@ -3,8 +3,10 @@ import { createTheme } from "@mui/material/styles";
 // Tùy chỉnh các giá trị màu sắc, font-size, spacing, ... tại đây
 export const theme = createTheme({
     palette: {
+
         primary: {
             main: "#FFBF17",
+            secondary: "#ffffff",
         },
         secondary: {
             main: "#DC143C",
@@ -13,7 +15,7 @@ export const theme = createTheme({
         background: {
             default: "#232323",
             secondary: "#2b2e33",
-            google: "#5383ec"
+            google: "#4285F4"
         },
         text: {
             primary: '#fff',
@@ -25,6 +27,7 @@ export const theme = createTheme({
         }
        
     },
+
     components: {
         MuiTextField: {
             styleOverrides: {

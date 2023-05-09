@@ -16,7 +16,7 @@
     "incremental": true,
     "paths": {
       "@/*": ["./*"]
-    }
+    },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/auth/chatform.jsx", "pages/auth/chatform.jsx", "pages/auth/chatform.jsx", "components/Auth/ChatForm.jsx", "components/Auth/ChatForm.jsx"],
   "exclude": ["node_modules"]

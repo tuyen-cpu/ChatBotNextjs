@@ -29,7 +29,7 @@ import Image from 'next/image'
 import { popupCenter } from '@/utils/fn'
 import Button from '@mui/material/Button'
 import { bgcolor } from '@mui/system'
-import GoogleButton from '@/components/GoogleButton'
+import GoogleButton from '@/components/Button/GoogleButton'
 const schema = yup.object().shape({
   email: yup
     .string()
@@ -88,36 +88,7 @@ export default function Login() {
         setIsLoading(false)
       }, 400)
     }
-
-    // UserAuthenticationService.signIn(data)
-    //   .then((res) => {
-    //     setNotify({ type: 'success', message: res.message })
-    //     setSnackbarOpen(true)
-    //     setIsLoginSucess(true)
-    //     userDetails(res)
-    //     navigateUrl(router, 'auth/chatform', encryptCredential(res.data.email))
-    //   })
-    //   .catch((error) => {
-    //     setNotify({ type: 'error', message: error.message })
-    //     setSnackbarOpen(true)
-    //     setIsLoading(false)
-    //   })
   }
-  // const verification = () => {
-  //   if (checkAuth()) {
-  //     const userDetails = localStorage.getItem('userDetails')
-  //     if (userDetails) {
-  //       const user = JSON.parse(userDetails)
-  //       let userEmail = user.email
-  //       const decodedEmail = decryptCredential(userEmail)
-  //       navigateUrl(router, 'auth/chatform', decodedEmail)
-  //     }
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   verification()
-  // }, [])
 
   useEffect(() => {
     checkLoading()
@@ -221,35 +192,7 @@ export default function Login() {
           >
             Sign In
           </LoadingButton>
-          <Button
-            sx={{
-              pl: 0.4,
-              py: 0,
-              pr: 1.2,
-              backgroundColor: 'background.google',
-              color: 'text.primary',
-              textTransform: 'unset',
-              '&:hover': {
-                backgroundColor: 'background.google',
-                boxShadow: 'none',
-                textDecoration: 'none',
-              },
-            }}
-            variant='contained'
-            startIcon={<Image height={44} width={44} src='/static/images/btn_google_dark_normal_ios.svg' alt={''} />}
-            onClick={() => popupCenter('/auth/google-signin', 'Sign in with Google')}
-          >
-            Sign in with Google
-          </Button>
-          <Button
-
-            variant="contained"
-            startIcon={<GoogleButton />}
-            onClick={() => popupCenter('/auth/google-signin', 'Sign in with Google')}
-          >
-
-            Đăng nhập với Google
-          </Button>
+         <GoogleButton onClick={() => popupCenter('/auth/google-signIn', 'Sign in with Google')}/>
           <Grid container justifyContent='flex-end'>
             <Grid item xs>
               <Link href='/auth/signup'>
