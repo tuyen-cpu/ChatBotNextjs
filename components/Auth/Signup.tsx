@@ -52,6 +52,7 @@ const schema = yup.object().shape({
       LimitLength.MIN_PASSWORD,
       `Must be at least ${LimitLength.MIN_PASSWORD} characters`
     )
+
     .max(LimitLength.MAX_PASSWORD, `Must be max ${LimitLength.MAX_PASSWORD} characters`)
     .required('Is required'),
   confirmPassword: yup
