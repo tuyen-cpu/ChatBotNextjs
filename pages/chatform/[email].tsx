@@ -1,4 +1,4 @@
-import Chatbot from '@/components/Auth/Chatbot/Chatbot'
+import Chatbot from '@/components/Chatbot/Chatbot'
 import React from 'react'
 
 const ChatPage = (props: any) => {

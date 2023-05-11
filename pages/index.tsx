@@ -1,13 +1,15 @@
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Link from 'next/link'
-import Grid from '@mui/material/Grid'
 import Avatar from '@mui/material/Avatar'
 import { useEffect, useState } from 'react'
-
 const inter = Inter({ subsets: ['latin'] })
-// import { checkAuth, decryptCredential } from '../utils/fn'
-import { useRouter } from 'next/router';
+
+import dynamic from 'next/dynamic';
+// const ComponentB = dynamic(() => import('@/components/Chats/Chats'));
+const ComponentA = dynamic(() => import('@/components/Chatbot/Chatbot'));
+
+
 export default function Home() {
   let [email, setEmail] = useState('')
   let [isAuth, setAuth] = useState(false)

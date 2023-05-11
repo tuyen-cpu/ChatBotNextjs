@@ -3,7 +3,8 @@ import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
-import Link from 'next/link'
+import NextLink from 'next/link'
+import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -25,38 +26,38 @@ const schema = yup.object().shape({
     .string()
     .min(
       LimitLength.MIN_FIRST_NAME,
-      `First Name must be at least ${LimitLength.MIN_FIRST_NAME} characters`
+      `Must be at least ${LimitLength.MIN_FIRST_NAME} characters`
     )
     .max(
       LimitLength.MAX_FIRST_NAME,
-      `First Name must be max ${LimitLength.MAX_FIRST_NAME} characters`
+      `Must be max ${LimitLength.MAX_FIRST_NAME} characters`
     )
     .required('First Name is required'),
   lastName: yup
     .string()
     .min(
       LimitLength.MIN_LAST_NAME,
-      `Last Name must be at least ${LimitLength.MIN_LAST_NAME} characters`
+      `Must be at least ${LimitLength.MIN_LAST_NAME} characters`
     )
-    .max(LimitLength.MAX_LAST_NAME, `Last Name must be max ${LimitLength.MAX_LAST_NAME} characters`)
-    .required('Last Name is required'),
+    .max(LimitLength.MAX_LAST_NAME, `Must be max ${LimitLength.MAX_LAST_NAME} characters`)
+    .required('Is required'),
   email: yup
     .string()
-    .max(LimitLength.MAX_EMAIL, `Email must be at least ${LimitLength.MAX_EMAIL} characters`)
-    .matches(Regex.EMAIL, 'Email must be a valid chatform address')
-    .required('Email is required'),
+    .max(LimitLength.MAX_EMAIL, `Must be at least ${LimitLength.MAX_EMAIL} characters`)
+    .matches(Regex.EMAIL, 'Must be a valid chatform address')
+    .required('Is required'),
   password: yup
     .string()
     .min(
       LimitLength.MIN_PASSWORD,
-      `Password must be at least ${LimitLength.MIN_PASSWORD} characters`
+      `Must be at least ${LimitLength.MIN_PASSWORD} characters`
     )
-    .max(LimitLength.MAX_PASSWORD, `Password must be max ${LimitLength.MAX_PASSWORD} characters`)
-    .required('Password is required'),
+    .max(LimitLength.MAX_PASSWORD, `Must be max ${LimitLength.MAX_PASSWORD} characters`)
+    .required('Is required'),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref('password')], 'Passwords must match')
-    .required('Confirm password is required'),
+    .oneOf([yup.ref('password')], 'Must match')
+    .required('Is required'),
 })
 export default function SignUp() {
   const router = useRouter()
@@ -98,7 +99,7 @@ export default function SignUp() {
   }
 
   return (
-    <Container component="main" maxWidth="md">
+    <Container component="main" maxWidth="sm">
       <CssBaseline />
       <Grid container justifyContent="center" alignItems="center">
         <Grid item sx={{ borderRadius: 0 }}>
@@ -116,14 +117,14 @@ export default function SignUp() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          // boxShadow: '#6a839c33 0 8px 24px',
+          boxShadow: '#00000033 0 8px 24px',
         }}
-        bgcolor="background.secondary"
+        bgcolor='background.paper'
       >
         <Typography component="h1" variant="h4" sx={{ fontWeight: 'bold' }}>
           Registration
         </Typography>
-        <Typography component="p" variant="h6" sx={{ mt: 2, opacity: 0.6 }}>
+        <Typography component='p' variant='body1' sx={{ mt: 2, opacity: 0.6 }}>
           Enter your information to sign up your account.
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{ mt: 3 }}>
@@ -203,16 +204,16 @@ export default function SignUp() {
               mt: 3,
               mb: 2,
               py: 1.4,
-              opacity: !isValid ? 0.5 : 1,
-              bgcolor: !isValid ? 'action.disabledBackground' : 'primary.main',
-              color: 'action.disabled',
+              // opacity: !isValid ? 0.5 : 1,
+              // bgcolor: !isValid ? 'action.disabledBackground' : 'primary.main',
+              color:'text.custom'
             }}
           >
             Sign Up
           </LoadingButton>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="/auth/login">Already have an account? Sign In</Link>
+              <Link href="/auth/login" component={NextLink} variant='subtitle2'>Already have an account? Sign In</Link>
             </Grid>
           </Grid>
           <Snackbar

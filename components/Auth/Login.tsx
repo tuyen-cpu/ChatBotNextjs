@@ -2,53 +2,46 @@ import { useEffect, useState } from 'react'
 import Avatar from '@mui/material/Avatar'
 import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
-import { CircularProgress } from '@mui/material'
-import Link from 'next/link'
+import NextLink from 'next/link'
+import Link from '@mui/material/Link'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
+import Divider from '@mui/material/Divider'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
-import UserAuthenticationService from '@/services/api/UserAuthenticationService'
-import Stack from '@mui/material/Stack'
 import Snackbar from '@mui/material/Snackbar'
 import Alert from '@mui/material/Alert'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { Regex } from '@/utils/constant'
 import { useRouter } from 'next/router'
-import {FcGoogle} from 'react-icons/fc'
-// import {navigateUrl} from '@/utils/fn'
-// import FormSignIn from '@/model/FormSignIn'
-// import { userDetails,checkAuth,encryptCredential,decryptCredential } from '@/utils/fn'
 import LoadingIcon from '@/components/LoadingIcon'
 import { SignInForm } from '@/model/user.model'
 import { getSession, signIn, useSession } from 'next-auth/react'
-import Image from 'next/image'
 import { popupCenter } from '@/utils/fn'
-import Button from '@mui/material/Button'
-import { bgcolor } from '@mui/system'
 import GoogleButton from '@/components/Button/GoogleButton'
+
 const schema = yup.object().shape({
   email: yup
     .string()
-    .matches(Regex.EMAIL, 'Email must be a valid chatform address')
+    .matches(Regex.EMAIL, 'Invalid Email')
     .required('Email is required'),
   password: yup.string().required('Password is required'),
 })
 
 export default function Login() {
   const router = useRouter()
-  const [notify, setNotify] = useState<{ type: 'success' | 'error'; message: string }>({
-    type: 'success',
-    message: '',
-  })
   const [snackbarOpen, setSnackbarOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [loadingMessage, setLoadingMessage] = useState('')
   const { data: session, status } = useSession()
+  const [notify, setNotify] = useState<{ type: 'success' | 'error'; message: string }>({
+    type: 'success',
+    message: '',
+  })
   const {
     register,
     handleSubmit,
@@ -70,7 +63,7 @@ export default function Login() {
         }`,
       })
       if (result?.ok) {
-        setNotify({ type: 'success', message: 'đăng nhập thành côngh' })
+        setNotify({ type: 'success', message: 'Login successful' })
         setSnackbarOpen(true)
       }
       if (result?.error) {
@@ -112,13 +105,13 @@ export default function Login() {
     }
   }
   return (
-    <Container component='main' maxWidth='md'>
+    <Container component='main' maxWidth='sm'>
       {isLoggedIn && <h1>YOU ARE LOGGED IN</h1>}
       <CssBaseline />
       <Grid container justifyContent='center' alignItems='center'>
         <Grid item sx={{ borderRadius: 0 }}>
           <Avatar
-            src='https://cutelogin.netlify.app/assets/logo2.9548f92a.png'
+            src='/images/logo.png'
             style={{ width: '100px', height: '100px', borderRadius: 0 }} // Thay đổi kích thước của Avatar tại đây
           />
         </Grid>
@@ -132,26 +125,25 @@ export default function Login() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          // boxShadow: '#6a839c33 0 8px 24px',
+          boxShadow: '#00000033 0 8px 24px',
         }}
-        bgcolor='background.secondary'
+        bgcolor='background.paper'
       >
-        <Typography component='h1' variant='h4' sx={{ fontWeight: 'bold' }}>
-          Welcome back!
+        <Typography component='h1' variant='h1' sx={{ fontWeight: 'bold' }}>
+          YOLO
         </Typography>
-        <Typography component='p' variant='h6' sx={{ mt: 2, opacity: 0.6 }}>
-          Enter your credentials to access your account.
+        <Typography component='p' variant='body1' sx={{ mt: 1.4, opacity: 0.6 }}>
+          Hi, welcome back!
         </Typography>
-        <Box component='form' onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 3 }}>
+        <Box component='form' onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 2 }}>
           <TextField
+            // sx={{ backgroundColor:'background.input',}}
+            // sx={{color:'text.primary'}}
             margin='normal'
             required
             fullWidth
             id='email'
             label='Email Address'
-            // inputProps={{
-            //   maxLength: 30,
-            // }}
             autoComplete='off'
             {...register('email')}
             error={!!errors.email}
@@ -165,10 +157,11 @@ export default function Login() {
             label='Password'
             type='password'
             id='password'
-            autoComplete='off'
+            autoComplete='current-password'
             inputProps={{
               maxLength: 30,
             }}
+            sx={{ color: 'text.primary' }}
             {...register('password')}
             error={!!errors.password}
             helperText={errors.password?.message}
@@ -185,23 +178,25 @@ export default function Login() {
               mt: 3,
               mb: 2,
               py: 1.4,
-              opacity: !isValid ? 0.5 : 1,
-              bgcolor: !isValid ? 'action.disabledBackground' : 'primary.main',
-              color: 'action.disabled',
+              color: 'text.custom',
             }}
           >
             Sign In
           </LoadingButton>
-         <GoogleButton onClick={() => popupCenter('/auth/google-signIn', 'Sign in with Google')}/>
-          <Grid container justifyContent='flex-end'>
+          <Divider> <Typography component='p' variant='subtitle2' sx={{opacity:0.7}}>OR</Typography></Divider>
+
+          <Box marginTop={2} display='flex' justifyContent='center' alignItems='center'>
+            <GoogleButton onClick={() => popupCenter('/auth/google-signIn', 'Sign in with Google')} />
+          </Box>
+          <Grid marginTop={3} container justifyContent='flex-end'>
             <Grid item xs>
-              <Link href='/auth/signup'>
-                <Typography>Forgot password?</Typography>
+              <Link href='/auth/signup' component={NextLink}>
+                <Typography component='p' variant='subtitle2'>Forgot password?</Typography>
               </Link>
             </Grid>
             <Grid item>
-              <Link href='/auth/signup'>
-                <Typography>{'Don\'t have an account? Sign Up'}</Typography>
+              <Link href='/auth/signup' component={NextLink}>
+                <Typography component='p' variant='subtitle2'>{'Don\'t have an account? Sign Up'}</Typography>
               </Link>
             </Grid>
           </Grid>

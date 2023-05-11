@@ -15,24 +15,27 @@ const GoogleButton: FC<GoogleButtonProps> = ({ onClick }) => {
           marginRight: '0px',
           p: 1.25,
           mr: 1.5,
+          ml:0,
           backgroundColor: '#ffffff',
-          borderRadius: '2px',
+          borderRadius: '4px',
           height: '100%',
           '& svg': {
             fontSize: '20px',
+
           },
         },
-
+        p:0,
         pr: 1.5,
-        pl: 0.5,
-        pt: 0,
-        pb: 0,
-        ml: 0,
+        pl: 0.2,
+        pt: 0.2,
+        pb: 0.2,
+        // ml: 0,
         lineHeight: 0,
-        borderRadius: '2px',
+        borderRadius: '4px',
         backgroundColor: 'background.google',
-        color: 'text.primary',
+        color: 'text.custom',
         textTransform: 'unset',
+         boxShadow: 'none',
         '&:hover': {
           backgroundColor: 'background.google',
           boxShadow: 'none',
@@ -42,6 +45,7 @@ const GoogleButton: FC<GoogleButtonProps> = ({ onClick }) => {
       variant='contained'
       startIcon={<FcGoogle height={60} width={40} />}
       onClick={onClick}
+
     >
       Sign in with Google
     </Button>

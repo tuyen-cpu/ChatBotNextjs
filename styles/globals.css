@@ -1,13 +1,29 @@
-a {
-   
-    color: skyblue;
-    text-decoration: none;
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter-VariableFont.ttf') format('truetype');
 }
-
-a:hover {
-
-  text-decoration: underline;
+/*html {*/
+/*    font-size: 62.5%; !* 62.5% of 16px = 10px *!*/
+/*}*/
+html{
+    height: 100vh;
 }
+body {
+    font-family: 'Avo', sans-serif;
+    /* Các CSS rules khác cho body */
+}
+/*input::-ms-reveal,*/
+/*input::-ms-clear {*/
+/*    display: none;*/
+/*}*/
+/*a {*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*a:hover {*/
+
+/*  text-decoration: none;*/
+/*}*/
 
 .header {
     color: snow;
